@@ -56,7 +56,6 @@ class Waves {
 
   private static final class Output {
     private final OutputSink sink;
-    private int currentLineCharCount = 0;
 
     private Output(OutputSink sink) {
       this.sink = sink;
@@ -64,12 +63,10 @@ class Waves {
 
     private void print(String variable) {
       sink.print(variable);
-      currentLineCharCount += variable.length();
     }
 
     private void println() {
       sink.println();
-      currentLineCharCount = 0;
     }
   }
 
@@ -85,7 +82,7 @@ class Waves {
     int label = 10;
 
     float scalarE = 7;
-    float scalarI = 0;
+    float scalarI = 1;
     float scalarJ = 0;
     float scalarMS = 4;
     final String waveString = "____....~~~~''''~~~~....____";
@@ -93,7 +90,6 @@ class Waves {
     final float waveLength = waveStringLength / numberOfWaves;
     final float charsPerIteration = waveLength / scalarE;
     boolean loopActive11 = false;
-    boolean loopActive10 = false;
 
     Output output = new Output(outputSink);
 
@@ -109,18 +105,13 @@ class Waves {
       }
 
       if (loopActive11 && label > 13) loopActive11 = false;
-      if (loopActive10 && label > 14) loopActive10 = false;
 
       switch (label) {
         // 10FORI=1TOFSTEP1
         case 10:
           label = 11;
-          if (!loopActive10) {
-            scalarI = 1;
-            loopActive10 = true;
-          }
-          if ((scalarI - numberOfWaves) * 1 > 0) {
-            label = 90;
+          if (scalarI - numberOfWaves > 0) {
+            break mainLoop;
           }
           break;
         // 11FORJ=1TOLSTEPMS
@@ -149,21 +140,12 @@ class Waves {
           scalarI = scalarI + 1;
           label = 10;
           break;
-        // 90PRINT
-        case 90:
-          label = 99;
-          output.println();
-          break;
-        // 99END
-        case 99:
-          label = 9999;
-          break;
-        case 9999:
-          break mainLoop;
         default:
           throw new IllegalStateException("The label " + label + " is not recognized.");
       }
     }
+    output.println();
   }
 }
+
 
