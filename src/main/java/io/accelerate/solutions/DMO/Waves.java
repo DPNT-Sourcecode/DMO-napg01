@@ -113,16 +113,16 @@ class Waves {
   }
 
   public static void run(OutputSink outputSink, float numberOfWaves) {
-    int label = 3;
+    int label = 5;
 
-    float scalarE = 0;
+    float scalarE = 7;
     float scalarI = 0;
     float scalarJ = 0;
-    float scalarL = 0;
-    float scalarMS = 0;
+    float scalarMS = 4;
     float scalarN = 0;
     float scalarS = 0;
-    String stringW = "";
+    String waveString = "____....~~~~''''~~~~....____";
+      float waveStringLength = len(waveString);
     boolean loopActive11 = false;
     boolean loopActive10 = false;
 
@@ -143,22 +143,10 @@ class Waves {
       if (loopActive10 && label > 14) loopActive10 = false;
 
       switch (label) {
-        // 3W$="____....~~~~''''~~~~....____":E=7:MS=4
-        case 3:
-          label = 4;
-          stringW = "____....~~~~''''~~~~....____";
-          scalarE = 7;
-          scalarMS = 4;
-          break;
-        // 4L=LEN(W$)
-        case 4:
-          label = 5;
-          scalarL = len(stringW);
-          break;
         // 5N=L/F:S=N/E
         case 5:
           label = 10;
-          scalarN = scalarL / numberOfWaves;
+          scalarN = waveStringLength / numberOfWaves;
           scalarS = scalarN / scalarE;
           break;
         // 10FORI=1TOFSTEP1
@@ -179,14 +167,14 @@ class Waves {
             scalarJ = 1;
             loopActive11 = true;
           }
-          if ((scalarJ - scalarL) * scalarMS > 0) {
+          if ((scalarJ - waveStringLength) * scalarMS > 0) {
             label = 14;
           }
           break;
         // 12PRINTMID$(W$,J,S);
         case 12:
           label = 13;
-          output.print(mid(stringW, scalarJ, scalarS));
+          output.print(mid(waveString, scalarJ, scalarS));
           break;
         // 13NEXTJ
         case 13:
@@ -218,5 +206,6 @@ class Waves {
     }
   }
 }
+
 
 

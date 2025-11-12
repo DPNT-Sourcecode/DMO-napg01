@@ -27,5 +27,13 @@ public class WavesTest {
     var result = waves.waves(3);
     assertThat(result, is("_.~'~.__.~'~.__.~'~._"));
   }
+
+  @Test
+  public void fourWaves() {
+    var waves = new DemoRound4n5Solution();
+    var result = waves.waves(4);
+    assertThat(result, is("_.~'~.__.~'~.__.~'~.__.~'~._"));
+  }
 }
+
 
