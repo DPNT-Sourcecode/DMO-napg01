@@ -35,5 +35,3 @@ public class WavesTest {
     assertThat(result, is("_.~'~.__.~'~.__.~'~.__.~'~._"));
   }
 }
-
-

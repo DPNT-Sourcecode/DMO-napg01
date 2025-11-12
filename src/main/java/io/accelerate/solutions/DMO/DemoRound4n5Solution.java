@@ -7,6 +7,3 @@ public class DemoRound4n5Solution {
     return outputSink.content().stripTrailing();
   }
 }
-
-
-

@@ -5,11 +5,6 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 class Waves {
-  @FunctionalInterface
-  interface InputProviderScalar {
-    float fetch();
-  }
-
   private static final DecimalFormat df;
 
   static {
@@ -57,10 +52,6 @@ class Waves {
     public String content() {
       return builder.toString();
     }
-
-    public StringBuilder builder() {
-      return builder;
-    }
   }
 
   private static final class Output {
@@ -76,19 +67,9 @@ class Waves {
       currentLineCharCount += variable.length();
     }
 
-    private void print(float variable) {
-      String text = df.format(variable);
-      sink.print(text);
-      currentLineCharCount += text.length();
-    }
-
     private void println() {
       sink.println();
       currentLineCharCount = 0;
-    }
-
-    private String tab(float numSpaces) {
-      return " ".repeat(Math.round(numSpaces - currentLineCharCount));
     }
   }
 
@@ -96,33 +77,21 @@ class Waves {
     return Math.round(variable);
   }
 
-  public static float roundDownToInt(float variable) {
-    return (float) Math.floor(variable);
-  }
-
-  public static float random(int positiveInt) {
-    return 0.5f;
-  }
-
   public static String mid(String text, float startingIndex, float numChars) {
     return text.substring(asInt(startingIndex - 1), asInt(startingIndex + numChars - 1));
   }
 
-  public static float len(String text) {
-    return (float) text.length();
-  }
-
   public static void run(OutputSink outputSink, float numberOfWaves) {
-    int label = 5;
+    int label = 10;
 
     float scalarE = 7;
     float scalarI = 0;
     float scalarJ = 0;
     float scalarMS = 4;
-    float scalarN = 0;
-    float scalarS = 0;
     String waveString = "____....~~~~''''~~~~....____";
-      float waveStringLength = len(waveString);
+    float waveStringLength = (float) waveString.length();
+    float scalarN = waveStringLength / numberOfWaves;
+    float scalarS = scalarN / scalarE;
     boolean loopActive11 = false;
     boolean loopActive10 = false;
 
@@ -136,19 +105,13 @@ class Waves {
       if (iterations > 99999) {
         output.print("INFINITE LOOP DETECTED. STOPPING EXECUTION.");
         output.println();
-        break mainLoop;
+        break;
       }
 
       if (loopActive11 && label > 13) loopActive11 = false;
       if (loopActive10 && label > 14) loopActive10 = false;
 
       switch (label) {
-        // 5N=L/F:S=N/E
-        case 5:
-          label = 10;
-          scalarN = waveStringLength / numberOfWaves;
-          scalarS = scalarN / scalarE;
-          break;
         // 10FORI=1TOFSTEP1
         case 10:
           label = 11;
@@ -206,6 +169,3 @@ class Waves {
     }
   }
 }
-
-
-
