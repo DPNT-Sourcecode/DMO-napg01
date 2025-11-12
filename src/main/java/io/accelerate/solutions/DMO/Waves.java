@@ -52,7 +52,6 @@ class Waves {
   public static void run(OutputSink outputSink, float numberOfWaves) {
     final float waveLength = (float) waveStringLength / numberOfWaves;
     final float charsPerIteration = waveLength / (float) 7;
-    System.err.println(charsPerIteration);
 
     for (int i = 0; i < numberOfWaves; i++) {
       for (int j = 1; j <= waveStringLength; j += 4) {
@@ -61,6 +60,7 @@ class Waves {
     }
   }
 }
+
 
 
 
