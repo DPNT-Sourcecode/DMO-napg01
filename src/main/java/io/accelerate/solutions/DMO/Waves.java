@@ -1,8 +1,10 @@
+package io.accelerate.solutions.DMO;
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-class Main {
+class Waves {
     @FunctionalInterface
     interface InputProviderScalar {
         float fetch();
@@ -228,3 +230,4 @@ class Main {
         }
     }
 }
+
