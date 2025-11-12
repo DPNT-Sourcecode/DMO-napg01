@@ -88,10 +88,10 @@ class Waves {
     float scalarI = 0;
     float scalarJ = 0;
     float scalarMS = 4;
-    String waveString = "____....~~~~''''~~~~....____";
-    float waveStringLength = (float) waveString.length();
-    float scalarN = waveStringLength / numberOfWaves;
-    float scalarS = scalarN / scalarE;
+    final String waveString = "____....~~~~''''~~~~....____";
+    final float waveStringLength = (float) waveString.length();
+    final float waveLength = waveStringLength / numberOfWaves;
+    final float charsPerIteration = waveLength / scalarE;
     boolean loopActive11 = false;
     boolean loopActive10 = false;
 
@@ -115,7 +115,7 @@ class Waves {
         // 10FORI=1TOFSTEP1
         case 10:
           label = 11;
-          if (loopActive10 == false) {
+          if (!loopActive10) {
             scalarI = 1;
             loopActive10 = true;
           }
@@ -126,7 +126,7 @@ class Waves {
         // 11FORJ=1TOLSTEPMS
         case 11:
           label = 12;
-          if (loopActive11 == false) {
+          if (!loopActive11) {
             scalarJ = 1;
             loopActive11 = true;
           }
@@ -137,17 +137,15 @@ class Waves {
         // 12PRINTMID$(W$,J,S);
         case 12:
           label = 13;
-          output.print(mid(waveString, scalarJ, scalarS));
+          output.print(mid(waveString, scalarJ, charsPerIteration));
           break;
         // 13NEXTJ
         case 13:
-          label = 14;
           scalarJ = scalarJ + scalarMS;
           label = 11;
           break;
         // 14NEXTI
         case 14:
-          label = 90;
           scalarI = scalarI + 1;
           label = 10;
           break;
@@ -159,7 +157,6 @@ class Waves {
         // 99END
         case 99:
           label = 9999;
-          label = 9999;
           break;
         case 9999:
           break mainLoop;
@@ -169,3 +166,4 @@ class Waves {
     }
   }
 }
+
