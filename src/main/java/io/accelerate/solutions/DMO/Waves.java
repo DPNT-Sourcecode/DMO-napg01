@@ -5,6 +5,9 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 class Waves {
+  private static final String waveString = "____....~~~~''''~~~~....____";
+  private static final int waveStringLength = waveString.length();
+
   private static final DecimalFormat df;
 
   static {
@@ -20,19 +23,12 @@ class Waves {
 
   interface OutputSink {
     void print(String text);
-
-    void println();
   }
 
   static final class ConsoleOutputSink implements OutputSink {
     @Override
     public void print(String text) {
       System.out.print(text);
-    }
-
-    @Override
-    public void println() {
-      System.out.println();
     }
   }
 
@@ -44,104 +40,28 @@ class Waves {
       builder.append(text);
     }
 
-    @Override
-    public void println() {
-      builder.append(System.lineSeparator());
-    }
-
     public String content() {
       return builder.toString();
     }
   }
 
-  private static final class Output {
-    private final OutputSink sink;
-
-    private Output(OutputSink sink) {
-      this.sink = sink;
-    }
-
-    private void print(String variable) {
-      sink.print(variable);
-    }
-
-    private void println() {
-      sink.println();
-    }
-  }
-
-  public static int asInt(float variable) {
-    return Math.round(variable);
-  }
-
-  public static String mid(String text, float startingIndex, float numChars) {
-    return text.substring(asInt(startingIndex - 1), asInt(startingIndex + numChars - 1));
+    public static String mid(String text, float startingIndex, float numChars) {
+        return text.substring(Math.round(startingIndex - 1), Math.round(startingIndex + numChars - 1));
   }
 
   public static void run(OutputSink outputSink, float numberOfWaves) {
-    float scalarE = 7;
-    float scalarJ = 1;
-    float scalarMS = 4;
-    final String waveString = "____....~~~~''''~~~~....____";
-    final float waveStringLength = (float) waveString.length();
-    final float waveLength = waveStringLength / numberOfWaves;
-    final float charsPerIteration = waveLength / scalarE;
-    boolean loopActive11 = false;
+    final float waveLength = (float) waveStringLength / numberOfWaves;
+    final float charsPerIteration = waveLength / (float) 7;
+    System.err.println(charsPerIteration);
 
-    Output output = new Output(outputSink);
-
-    int iterations = 0;
-
-    i:
     for (int i = 0; i < numberOfWaves; i++) {
-      loopActive11 = false;
-
-      j:
-      for (int j = 1; j <= waveStringLength; j += scalarMS) {
-          output.print(mid(waveString, j, charsPerIteration));
-          int label = 11;
-
-//        mainLoop:
-//        while (true) {
-//          iterations += 1;
-//          if (iterations > 99999) {
-//            output.print("INFINITE LOOP DETECTED. STOPPING EXECUTION.");
-//            output.println();
-//            break;
-//          }
-//
-//          switch (label) {
-//            // 11FORJ=1TOLSTEPMS
-//            case 11:
-//              label = 12;
-//              if (!loopActive11) {
-//                scalarJ = 1;
-//                loopActive11 = true;
-//              }
-//              if (scalarJ - waveStringLength > 0) {
-//                continue i;
-//              }
-//              break;
-//            // 12PRINTMID$(W$,J,S);
-//            case 12:
-//              label = 13;
-//              output.print(mid(waveString, scalarJ, charsPerIteration));
-//              break;
-//            // 13NEXTJ
-//            case 13:
-//              scalarJ = scalarJ + scalarMS;
-//              label = 11;
-//              break;
-//            // 14NEXTI
-//            default:
-//              throw new IllegalStateException("The label " + label + " is not recognized.");
-//          }
-//        }
+      for (int j = 1; j <= waveStringLength; j += 4) {
+        outputSink.print(mid(waveString, j, charsPerIteration));
       }
     }
-    output.println();
   }
 }
+
 
 
 
