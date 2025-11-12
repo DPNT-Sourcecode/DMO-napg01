@@ -5,7 +5,7 @@ import io.accelerate.runner.SolutionNotImplementedException;
 public class DemoRound3Solution {
 
     public int inventoryAdd(InventoryItem item, int quantity) {
-        throw new SolutionNotImplementedException();
+        return quantity;
     }
 
     public int inventorySize() {
@@ -16,3 +16,4 @@ public class DemoRound3Solution {
         throw new SolutionNotImplementedException();
     }
 }
+
