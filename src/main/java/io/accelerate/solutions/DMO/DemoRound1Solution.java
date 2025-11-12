@@ -3,19 +3,20 @@ package io.accelerate.solutions.DMO;
 import io.accelerate.runner.SolutionNotImplementedException;
 
 public class DemoRound1Solution {
-    public int increment(int x) {
-        throw new SolutionNotImplementedException();
-    }
+  public int increment(int x) {
+    return x + 1;
+  }
 
-    public String toUppercase(String text) {
-        throw new SolutionNotImplementedException();
-    }
+  public String toUppercase(String text) {
+    return text.toUpperCase();
+  }
 
-    public String letterToSanta() {
-        throw new SolutionNotImplementedException();
-    }
+  public String letterToSanta() {
+    return "Dear Santa, I want to rule the world.";
+  }
 
-    public int countLines(String text) {
-        throw new SolutionNotImplementedException();
-    }
+  public int countLines(String text) {
+    return Math.toIntExact(text.lines().count());
+  }
 }
+
