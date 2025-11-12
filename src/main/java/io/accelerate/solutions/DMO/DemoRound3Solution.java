@@ -5,11 +5,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 public class DemoRound3Solution {
+  private final ConcurrentMap<String, InventoryItem> itemsBySku = new ConcurrentHashMap<>();
   private final ConcurrentMap<InventoryItem, Integer> stock = new ConcurrentHashMap<>();
 
   public int inventoryAdd(InventoryItem item, int quantity) {
-    stock.put(item, quantity);
-    return quantity;
+    itemsBySku.put(item.sku(), item);
+    return stock.merge(item, quantity, Integer::sum);
   }
 
   public int inventorySize() {
@@ -17,8 +18,6 @@ public class DemoRound3Solution {
   }
 
   public InventoryItem inventoryGet(String sku) {
-    throw new SolutionNotImplementedException();
+    return itemsBySku.get(sku);
   }
 }
-
-

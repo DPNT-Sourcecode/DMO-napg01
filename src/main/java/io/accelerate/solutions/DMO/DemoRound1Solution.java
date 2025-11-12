@@ -19,4 +19,3 @@ public class DemoRound1Solution {
     return Math.toIntExact(text.lines().count());
   }
 }
-

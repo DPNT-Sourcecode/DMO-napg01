@@ -19,4 +19,3 @@ public class DemoRound2Solution {
         return integerList.stream().filter(x -> x >= threshold).toList();
     }
 }
-
